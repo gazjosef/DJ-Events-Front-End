@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import { API_URL } from "@/config/index";
+import styles from "@/styles/Event.module.css";
 
 export default function EventPage({ evt }) {
   return (
@@ -9,39 +10,12 @@ export default function EventPage({ evt }) {
   );
 }
 
-export async function getStaticPaths() {
-  const res = await fetch(`{API_URL}/api/events`);
-  const events = await res.json();
-
-  const paths = events.map((evt) => ({
-    params: { slug: evt.slug },
-  }));
-  return {
-    paths,
-  };
-}
-
-export async function getStaticProps({ params: { slug } }) {
-  console.log(slug);
+export async function getServerSideProps({ query: { slug } }) {
   const res = await fetch(`${API_URL}/api/events/${slug}`);
   const events = await res.json();
-
   return {
     props: {
       evt: events[0],
     },
-    revalidate: 1,
   };
 }
-
-// export async function getServerSideProps({ query: { slug } }) {
-//   console.log(slug);
-//   const res = await fetch(`${API_URL}/api/events/${slug}`);
-//   const events = await res.json();
-
-//   return {
-//     props: {
-//       evt: events[0],
-//     },
-//   };
-// }
