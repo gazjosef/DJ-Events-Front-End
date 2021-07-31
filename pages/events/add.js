@@ -20,11 +20,11 @@ export default function AddEventPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit");
+    console.log(values);
   };
 
   const handleInputChange = (e) => {
-    const { name, values } = e.target;
+    const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
 
@@ -45,6 +45,68 @@ export default function AddEventPage() {
               onChange={handleInputChange}
             />
           </div>
+          <div>
+            <label htmlFor="performers">Performers</label>
+            <input
+              type="text"
+              id="performers"
+              name="performers"
+              values={values.performers}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="venue">Venue</label>
+            <input
+              type="text"
+              id="venue"
+              name="venue"
+              values={values.venue}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="address">Address</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              values={values.address}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="date">Date</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              values={values.date}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="time">Time</label>
+            <input
+              type="text"
+              id="time"
+              name="time"
+              values={values.time}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="description">Event Description</label>
+          <textarea
+            type="text"
+            id="description"
+            name="description"
+            values={values.description}
+            onChange={handleInputChange}
+          ></textarea>
+          <input type="submit" value="Add Event" className="btn" />
         </div>
       </form>
     </Layout>
