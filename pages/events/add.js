@@ -1,3 +1,5 @@
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -27,7 +29,7 @@ export default function AddEventPage() {
     );
 
     if (hasEmptyFields) {
-      console.log("Please fill in all fields");
+      toast.error("Please fill in all fields");
     }
   };
 
@@ -40,6 +42,7 @@ export default function AddEventPage() {
     <Layout title="Add New Event">
       <Link href="/events">Go Back</Link>
       <h1>Add Event</h1>
+      <ToastContainer />
 
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.grid}>
