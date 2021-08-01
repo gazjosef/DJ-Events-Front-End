@@ -7,15 +7,15 @@ import Layout from "@/components/Layout";
 import { API_URL } from "@/config/index";
 import styles from "@/styles/Form.module.css";
 
-export default function EditEventPage() {
+export default function EditEventPage({ evt }) {
   const [values, setValues] = useState({
-    name: "",
-    performers: "",
-    venue: "",
-    address: "",
-    date: "",
-    time: "",
-    description: "",
+    name: evt.name,
+    performers: evt.performers,
+    venue: evt.venue,
+    address: evt.address,
+    date: evt.date,
+    time: evt.time,
+    description: evt.description,
   });
 
   const router = useRouter();
@@ -54,9 +54,10 @@ export default function EditEventPage() {
   };
 
   return (
-    <Layout title="Edit New Event">
+    <Layout title="Add New Event">
       <Link href="/events">Go Back</Link>
-      <h1>Add Event</h1>
+      <h1>Edit Event</h1>
+
       <ToastContainer />
 
       <form onSubmit={handleSubmit} className={styles.form}>
@@ -67,7 +68,7 @@ export default function EditEventPage() {
               type="text"
               id="name"
               name="name"
-              values={values.name}
+              value={values.name}
               onChange={handleInputChange}
             />
           </div>
@@ -77,7 +78,7 @@ export default function EditEventPage() {
               type="text"
               id="performers"
               name="performers"
-              values={values.performers}
+              value={values.performers}
               onChange={handleInputChange}
             />
           </div>
@@ -87,7 +88,7 @@ export default function EditEventPage() {
               type="text"
               id="venue"
               name="venue"
-              values={values.venue}
+              value={values.venue}
               onChange={handleInputChange}
             />
           </div>
@@ -97,7 +98,7 @@ export default function EditEventPage() {
               type="text"
               id="address"
               name="address"
-              values={values.address}
+              value={values.address}
               onChange={handleInputChange}
             />
           </div>
@@ -107,7 +108,7 @@ export default function EditEventPage() {
               type="date"
               id="date"
               name="date"
-              values={values.date}
+              value={values.date}
               onChange={handleInputChange}
             />
           </div>
@@ -117,7 +118,7 @@ export default function EditEventPage() {
               type="text"
               id="time"
               name="time"
-              values={values.time}
+              value={values.time}
               onChange={handleInputChange}
             />
           </div>
@@ -129,7 +130,7 @@ export default function EditEventPage() {
             type="text"
             id="description"
             name="description"
-            values={values.description}
+            value={values.description}
             onChange={handleInputChange}
           ></textarea>
           <input type="submit" value="Update Event" className="btn" />
@@ -137,4 +138,15 @@ export default function EditEventPage() {
       </form>
     </Layout>
   );
+}
+
+export async function getServerSideProps({ params: { id } }) {
+  const res = await fetch(`${API_URL}/events/${id}`);
+  const evt = await res.json();
+
+  return {
+    props: {
+      evt,
+    },
+  };
 }
