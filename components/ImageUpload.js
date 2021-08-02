@@ -2,11 +2,11 @@ import { useState } from "react";
 import { API_URL } from "@/config/index";
 import styles from "@/styles/Form.module.css";
 
-export default function ImageUpload({ evtId, imageUpladed }) {
+export default function ImageUpload({ evtId, imageUploaded }) {
   const [image, setImage] = useState(null);
 
   const handleSubmit = async (e) => {
-    e.preventDefault;
+    e.preventDefault();
     const formData = new FormData();
     formData.append("files", image);
     formData.append("ref", "events");
@@ -14,12 +14,12 @@ export default function ImageUpload({ evtId, imageUpladed }) {
     formData.append("field", "image");
 
     const res = await fetch(`${API_URL}/upload`, {
-      mathod: "POST",
+      method: "POST",
       body: formData,
     });
 
     if (res.ok) {
-      imageUpladed();
+      imageUploaded();
     }
   };
 

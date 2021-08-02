@@ -15,12 +15,11 @@ export default function EventsPage({ events }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps({ query: { page = 1 } }) {
   const res = await fetch(`${API_URL}/events?_sort=date:ASC`);
   const events = await res.json();
 
   return {
     props: { events },
-    revalidate: 1,
   };
 }
