@@ -24,18 +24,25 @@ export default function Header() {
               <a>Events</a>
             </Link>
           </li>
-          <li>
-            <Link href="/events/add">
-              <a>Add Event</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/account/login">
-              <a className="btn-secondary btn-icon">
-                <FaSignInAlt /> Login
-              </a>
-            </Link>
-          </li>
+          {user ? (
+            <>
+              <li>
+                <Link href="/events/add">
+                  <a>Add Event</a>
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link href="/account/login">
+                  <a className="btn-secondary btn-icon">
+                    <FaSignInAlt /> Login
+                  </a>
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </header>
