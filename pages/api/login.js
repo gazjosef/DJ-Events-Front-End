@@ -1,3 +1,4 @@
+import cookie from "cookie";
 import { API_URL } from "@/config/index";
 
 export default async (req, res) => {
@@ -16,8 +17,6 @@ export default async (req, res) => {
     });
 
     const data = await strapiRes.json();
-
-    console.log(data.jwt);
 
     if (strapiRes.ok) {
       // @todo - Set cookie
