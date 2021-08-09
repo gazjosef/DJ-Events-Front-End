@@ -39,5 +39,15 @@ export default function EventMap({ evt }) {
 
   console.log(lat, lng);
 
-  return <div>MAP</div>;
+  return (
+    <ReactMapGl
+      {...viewport}
+      mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
+      onViewportChange={(vp) => setViewport(vp)}
+    >
+      <Marker key={evt.id} latitude={lat} longitude={lng}>
+        <Image src="/images/pin.svg" width={30} height={30} />
+      </Marker>
+    </ReactMapGl>
+  );
 }
